@@ -7,3 +7,21 @@
 
     "dev": "webpack --mode development ./frontend/src/index.js --output-path ./frontend/static/frontend/main.js",
     "build": "webpack --mode production ./frontend/src/index.js --output-path ./frontend/static/frontend/main.js"
+
+    axios({
+                method: 'POST',          
+                url: config.NO_QUOTA_DOWNLOAD,
+                data: allData,
+            })
+            .then(function(response) {
+            self.setState({
+                results:response.data.results,
+                msg:response.data.msg,
+                total_amount:response.data.total_amount,
+                },
+                //console.log(self.setState.results),
+                ()=>{self.openDELVModal()});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
